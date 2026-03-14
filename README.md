@@ -23,7 +23,7 @@
 ## Features
 
 - Clipboard sync both ways.
-- Clipbaord history.
+- Clipboard history.
 - Send and receive files both ways
 - Browse phone files from PC and pc files from phone
 - You can view images,videos,pdfs,music of other connected device

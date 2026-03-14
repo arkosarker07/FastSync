@@ -14,7 +14,9 @@
 | Platform | Download |
 |----------|----------|
 | Windows | [FastSync.exe](https://github.com/arkosarker07/FastSync/releases/latest/download/FastSync.exe) |
-| Android | [FastSync.apk](https://github.com/arkosarker07/FastSync/releases/latest/download/FastSync.apk) |
+| Android | [FastSync.apk](https://github.com/arkosarker07/FastSync/releases/latest/download/app-arm64-v8a-release.apk) |
+| Android | [FastSync.apk](https://github.com/arkosarker07/FastSync/releases/latest/download/app-arm64-v8a-release.apk) |
+| Android | [FastSync.apk](https://github.com/arkosarker07/FastSync/releases/latest/download/app-arm64-v8a-release.apk) |
 
 ---
 
@@ -29,7 +31,17 @@
 
 ## Screenshots
 
-![App Screenshot](screenshots/Screenshot_20260314-203756.png)
+## Screenshots
+
+**Android App**
+
+<img src="screenshots/Screenshot_20260314-203756.png" width="300"/>
+<img src="screenshots/Screenshot_20260314-203802.png" width="300"/>
+<img src="screenshots/Screenshot_20260314-203942.png" width="300"/>
+
+**PC Application**
+
+<img src="screenshots/Screenshot_2026_03_14_205124.png" width="700"/>
 
 ---
 

@@ -14,7 +14,9 @@
 | Platform | Download |
 |----------|----------|
 | Windows | [FastSync.exe](https://github.com/arkosarker07/FastSync/releases/latest/download/FastSync.exe) |
-| Android | [FastSync.apk](https://github.com/arkosarker07/FastSync/releases/latest/download/FastSync.apk) |
+| Android | [app-arm64-v8a-release.apk](https://github.com/arkosarker07/FastSync/releases/latest/download/app-arm64-v8a-release.apk) |
+| Android | [app-armeabi-v7a-release.apk](https://github.com/arkosarker07/FastSync/releases/latest/download/app-armeabi-v7a-release.apk) |
+| Android | [app-x86_64-release.apk](https://github.com/arkosarker07/FastSync/releases/latest/download/app-x86_64-release.apk) |
 
 ---
 

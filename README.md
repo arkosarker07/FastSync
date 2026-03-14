@@ -39,13 +39,17 @@
 
 **Android App**
 
-<img src="screenshots/Screenshot_20260314-203756.png" width="180"/>
-<img src="screenshots/Screenshot_20260314-203802.png" width="180"/>
-<img src="screenshots/Screenshot_20260314-203942.png" width="180"/>
+## Screenshots
+
+**Android App**
+
+| | | |
+|---|---|---|
+| <img src="screenshots/Screenshot_20260314-203756.png" width="160"/> | <img src="screenshots/Screenshot_20260314-203802.png" width="180"/> | <img src="screenshots/Screenshot_20260314-203942.png" width="160"/> |
 
 **PC Application**
 
-<img src="screenshots/Screenshot_2026_03_14_205124.png" width="600"/>
+<img src="screenshots/Screenshot_2026_03_14_205124.png" width="500"/>
 
 ---
 

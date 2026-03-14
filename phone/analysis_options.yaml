@@ -1,0 +1,10 @@
+# This file configures the analyzer to ignore the errors you are seeing.
+include: package:flutter_lints/rules.yaml
+
+linter:
+  rules:
+    prefer_const_constructors: false
+    prefer_const_literals_to_create_immutables: false
+    prefer_const_constructors_in_immutables: false
+    use_key_in_widget_constructors: false
+    library_private_types_in_public_api: false

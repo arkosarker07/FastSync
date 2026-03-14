@@ -31,16 +31,6 @@
 
 ## Screenshots
 
-## Screenshots
-
-**Android App**
-
-## Screenshots
-
-**Android App**
-
-## Screenshots
-
 **Android App**
 
 | | | |

@@ -192,7 +192,7 @@ async def download_file(path: str):
 class FastSyncUI:
     def __init__(self, root: tk.Tk) -> None:
         self.root = root
-        self.root.title("FastSync — PC")
+        self.root.title("FastSync")
         self.root.geometry("1150x740")
         self.root.configure(bg="#0f172a")
         self.root.minsize(850, 620)
@@ -226,29 +226,73 @@ class FastSyncUI:
 
     def _build_ui(self) -> None:
 
+        # ── Premium ttk styles ──
+        style = ttk.Style()
+        style.theme_use("clam")
+        style.configure("Nav.TButton",
+                        background="#334155", foreground="white",
+                        font=("Segoe UI Semibold", 10),
+                        borderwidth=0, focusthickness=0,
+                        padding=(0, 9))  # Reduced x-padding so all 3 fit
+        style.map("Nav.TButton",
+                  background=[("active", "#475569"), ("pressed", "#1e293b")])
+
+        style.configure("Accent.TButton",
+                        background="#3b82f6", foreground="white",
+                        font=("Segoe UI Semibold", 11),
+                        borderwidth=0, focusthickness=0,
+                        padding=(12, 11))
+        style.map("Accent.TButton",
+                  background=[("active", "#2563eb"), ("pressed", "#1d4ed8")])
+
+        style.configure("Side.TButton",
+                        background="#334155", foreground="white",
+                        font=("Segoe UI Semibold", 11),
+                        borderwidth=0, focusthickness=0,
+                        padding=(12, 11))
+        style.map("Side.TButton",
+                  background=[("active", "#475569"), ("pressed", "#1e293b")])
+
+        style.configure("Copy.TButton",
+                        background="#0ea5e9", foreground="white",
+                        font=("Segoe UI Semibold", 9),
+                        borderwidth=0, focusthickness=0,
+                        padding=(9, 5))
+        style.map("Copy.TButton",
+                  background=[("active", "#0284c7"), ("pressed", "#0369a1")])
+
+        style.configure("TProgressbar",
+                        troughcolor="#1e293b",
+                        background="#3b82f6",
+                        borderwidth=0,
+                        thickness=8)
+
         # Nav Bar 
-        nav = tk.Frame(self.root, bg="#1e293b", height=48)
+        nav = tk.Frame(self.root, bg="#1e293b", height=52)
         nav.pack(side="top", fill="x")
         nav.pack_propagate(False)
 
-        tk.Button(nav, text="🏠 Home", command=self.go_home,
-                  bg="#334155", fg="white", bd=0, highlightthickness=0,
-                  relief="flat", padx=14, pady=8, cursor="hand2"
-                  ).pack(side="left", padx=(8, 2), pady=6)
-        tk.Button(nav, text="← Back", command=self.go_back,
-                  bg="#334155", fg="white", bd=0, highlightthickness=0,
-                  relief="flat", padx=14, pady=8, cursor="hand2"
-                  ).pack(side="left", padx=2, pady=6)
-        tk.Button(nav, text="🔄 Refresh", command=self.load_phone_files,
-                  bg="#334155", fg="white", bd=0, highlightthickness=0,
-                  relief="flat", padx=14, pady=8, cursor="hand2"
-                  ).pack(side="left", padx=2, pady=6)
+        # Nav buttons frame matching sidebar width (280px)
+        nav_btn_frame = tk.Frame(nav, bg="#1e293b", width=280)
+        nav_btn_frame.pack(side="left", fill="y")
+        nav_btn_frame.pack_propagate(False)
 
+        ttk.Button(nav_btn_frame, text="Home", command=self.go_home,
+                   style="Nav.TButton", cursor="hand2", width=0
+                   ).pack(side="left", fill="both", expand=True, padx=(10, 2), pady=8)
+        ttk.Button(nav_btn_frame, text="Back", command=self.go_back,
+                   style="Nav.TButton", cursor="hand2", width=0
+                   ).pack(side="left", fill="both", expand=True, padx=2, pady=8)
+        ttk.Button(nav_btn_frame, text="Refresh", command=self.load_phone_files,
+                   style="Nav.TButton", cursor="hand2", width=0
+                   ).pack(side="left", fill="both", expand=True, padx=(2, 10), pady=8)
+        
         self.status_var = tk.StringVar(
-            value=f"💻 PC IP: {MY_IP}   |   📱 Phone: waiting...")
+            value=f"PC IP: {MY_IP}   |    Phone: waiting...")
         tk.Label(nav, textvariable=self.status_var,
                  fg="#38bdf8", bg="#1e293b",
-                 font=("Segoe UI", 9)).pack(side="right", padx=16)
+                 font=("Segoe UI Semibold", 10)).pack(side="right", padx=18)
+
 
         # Main Layout
         main = tk.Frame(self.root, bg="#0f172a")
@@ -260,30 +304,30 @@ class FastSyncUI:
         side.pack_propagate(False)
 
         tk.Label(side, text="FastSync", fg="#38bdf8", bg="#1e293b",
-                 font=("Segoe UI", 17, "bold")).pack(pady=(22, 2))
+                 font=("Segoe UI", 19, "bold")).pack(pady=(24, 3))
         tk.Label(side, text="Your PC's IP Address",
-                 fg="#64748b", bg="#1e293b",
-                 font=("Segoe UI", 9)).pack()
+                 fg="#94a3b8", bg="#1e293b",
+                 font=("Segoe UI Semibold", 10)).pack()
         tk.Label(side, text=MY_IP, fg="#22c55e", bg="#1e293b",
-                 font=("Segoe UI", 15, "bold")).pack(pady=(3, 14))
+                 font=("Segoe UI", 17, "bold")).pack(pady=(4, 16))
 
         tk.Frame(side, bg="#334155", height=1).pack(fill="x", padx=20)
 
-        tk.Label(side, text="📱 Phone IP", fg="#94a3b8", bg="#1e293b",
-                 font=("Segoe UI", 9)).pack(pady=(10, 2))
+        tk.Label(side, text=" Phone IP", fg="#94a3b8", bg="#1e293b",
+                 font=("Segoe UI Semibold", 10)).pack(pady=(12, 3))
         phone_entry = tk.Entry(side, textvariable=self.phone_ip_var,
                                bg="#0f172a", fg="white",
                                insertbackground="white", borderwidth=0,
-                               highlightthickness=1, highlightcolor="#38bdf8",
+                               highlightthickness=2, highlightcolor="#38bdf8",
                                highlightbackground="#334155",
-                               font=("Segoe UI", 12))
-        phone_entry.pack(pady=2, padx=16, fill="x", ipady=6)
+                               font=("Segoe UI Semibold", 13))
+        phone_entry.pack(pady=3, padx=18, fill="x", ipady=8)
         phone_entry.bind("<Return>", lambda _: self.load_phone_files())
 
         self.conn_label = tk.Label(side, text="⏳ Waiting for phone...",
-                                    fg="orange", bg="#1e293b",
-                                    font=("Segoe UI", 9))
-        self.conn_label.pack(pady=5)
+                                    fg="#f59e0b", bg="#1e293b",
+                                    font=("Segoe UI Semibold", 10))
+        self.conn_label.pack(pady=6)
 
         tk.Frame(side, bg="#334155", height=1).pack(fill="x", padx=20)
 
@@ -292,11 +336,12 @@ class FastSyncUI:
         clip_header.pack(fill="x", padx=12, pady=(12, 2))
         tk.Label(clip_header, text="📋  Clipboard History",
                  fg="#22c55e", bg="#1e293b",
-                 font=("Segoe UI", 10, "bold")).pack(side="left")
+                 font=("Segoe UI Semibold", 11, "bold")).pack(side="left")
         tk.Button(clip_header, text="✕ Clear", command=self._clear_clipboard,
                   bg="#1e293b", fg="#ef4444", bd=0, highlightthickness=0,
-                  relief="flat", font=("Segoe UI", 8, "bold"),
-                  cursor="hand2", padx=4
+                  relief="flat", font=("Segoe UI Semibold", 9, "bold"),
+                  cursor="hand2", padx=6, activebackground="#1e293b",
+                  activeforeground="#f87171"
                   ).pack(side="right", pady=2)
 
         clip_wrap = tk.Frame(side, bg="#0f172a", bd=0)
@@ -304,38 +349,37 @@ class FastSyncUI:
         self._build_clip_panel(clip_wrap)
 
         # Sidebar Buttons 
-        tk.Button(side, text="📤  Send File to Phone",
-                  command=self.send_file_to_phone,
-                  bg="#3b82f6", fg="white", bd=0, highlightthickness=0,
-                  relief="flat", padx=10, pady=9, cursor="hand2",
-                  font=("Segoe UI", 10)
-                  ).pack(pady=(10, 4), padx=16, fill="x")
-        tk.Button(side, text="📁  Open FastSync Folder",
-                  command=lambda: os.startfile(SHARE_FOLDER),
-                  bg="#334155", fg="white", bd=0, highlightthickness=0,
-                  relief="flat", padx=10, pady=9, cursor="hand2",
-                  font=("Segoe UI", 10)
-                  ).pack(pady=4, padx=16, fill="x")
+        ttk.Button(side, text="📤  Send File to Phone",
+                   command=self.send_file_to_phone,
+                   style="Accent.TButton", cursor="hand2"
+                   ).pack(pady=(12, 5), padx=18, fill="x")
+        ttk.Button(side, text="📁  Open FastSync Folder",
+                   command=lambda: os.startfile(SHARE_FOLDER),
+                   style="Side.TButton", cursor="hand2"
+                   ).pack(pady=5, padx=18, fill="x")
 
         #Right: File Browser
         right = tk.Frame(main, bg="#0f172a")
         right.pack(side="right", fill="both", expand=True)
 
-        self.path_var = tk.StringVar(value="📱 Phone / ")
+        self.path_var = tk.StringVar(value=" Phone / ")
         tk.Label(right, textvariable=self.path_var,
-                 fg="#64748b", bg="#0f172a",
-                 font=("Segoe UI", 9), anchor="w"
-                 ).pack(fill="x", padx=16, pady=(10, 2))
+                 fg="#94a3b8", bg="#0f172a",
+                 font=("Segoe UI Semibold", 10), anchor="w"
+                 ).pack(fill="x", padx=18, pady=(12, 3))
 
-        list_frame = tk.Frame(right, bg="#0f172a")
-        list_frame.pack(fill="both", expand=True, padx=16, pady=(0, 16))
+        list_frame = tk.Frame(right, bg="#1e293b", bd=0,
+                             highlightthickness=1, highlightbackground="#334155")
+        list_frame.pack(fill="both", expand=True, padx=18, pady=(0, 18))
 
-        list_scroll = tk.Scrollbar(list_frame)
+        list_scroll = tk.Scrollbar(list_frame, bg="#1e293b",
+                                   troughcolor="#0f172a", bd=0,
+                                   highlightthickness=0, relief="flat")
         list_scroll.pack(side="right", fill="y")
 
         self.listbox = tk.Listbox(
-            list_frame, bg="#0f172a", fg="white",
-            font=("Segoe UI", 11), borderwidth=0,
+            list_frame, bg="#0f172a", fg="#e2e8f0",
+            font=("Segoe UI Semibold", 12), borderwidth=0,
             highlightthickness=0, relief="flat",
             selectbackground="#1e3a5f", activestyle="none",
             yscrollcommand=list_scroll.set)
@@ -386,8 +430,8 @@ class FastSyncUI:
             w.destroy()
 
         items = list(reversed(clipboard_history))
-        font_main = ("Segoe UI", 9)
-        font_btn  = ("Segoe UI", 8, "bold")
+        font_main = ("Segoe UI Semibold", 10)
+        font_btn  = ("Segoe UI Semibold", 9, "bold")
 
         for idx, text in enumerate(items):
             # Card frame
@@ -400,8 +444,8 @@ class FastSyncUI:
             preview = text[:28].replace("\n", " ") + ("…" if len(text) > 28 else "")
             lbl = tk.Label(card, text=preview, bg="#1e293b",
                            fg="#e2e8f0", font=font_main,
-                           anchor="w", padx=6)
-            lbl.pack(side="left", fill="x", expand=True, pady=5)
+                           anchor="w", padx=8)
+            lbl.pack(side="left", fill="x", expand=True, pady=6)
 
             # Copy button (right)
             real_idx = len(clipboard_history) - 1 - idx
@@ -415,8 +459,9 @@ class FastSyncUI:
                 card, text="⎘ Copy", command=_copy,
                 bg="#0ea5e9", fg="white", font=font_btn,
                 bd=0, highlightthickness=0, relief="flat",
-                padx=7, pady=3, cursor="hand2")
-            copy_btn.pack(side="right", padx=4, pady=4)
+                padx=9, pady=4, cursor="hand2",
+                activebackground="#0284c7", activeforeground="white")
+            copy_btn.pack(side="right", padx=5, pady=5)
 
             # Hover effect
             for w in (card, lbl):
@@ -514,7 +559,7 @@ class FastSyncUI:
 
         full_path = f"/storage/emulated/0/{self.current_path}/{name}".replace("//", "/")
         menu = tk.Menu(self.root, tearoff=0, bg="#1e293b", fg="white",
-                       font=("Segoe UI", 10), bd=0,
+                       font=("Segoe UI Semibold", 11), bd=0,
                        activebackground="#334155",
                        activeforeground="#38bdf8")
         menu.add_command(label="👁  Preview",
@@ -571,12 +616,14 @@ class FastSyncUI:
             bar = tk.Frame(win, bg="#1e293b")
             bar.pack(fill="x")
             tk.Label(bar, text=name, fg="white", bg="#1e293b",
-                     font=("Segoe UI", 10)).pack(side="left", padx=10, pady=6)
+                     font=("Segoe UI Semibold", 11)).pack(side="left", padx=12, pady=8)
             tk.Button(bar, text="⬇ Download", bg="#0ea5e9", fg="white",
                       bd=0, highlightthickness=0, relief="flat",
-                      padx=8, pady=4, cursor="hand2",
+                      padx=10, pady=5, cursor="hand2",
+                      font=("Segoe UI Semibold", 10),
+                      activebackground="#0284c7", activeforeground="white",
                       command=lambda: self._download_phone_file(ip, name, full_path)
-                      ).pack(side="right", padx=8, pady=4)
+                      ).pack(side="right", padx=10, pady=6)
 
             lbl: Any = tk.Label(win, image=photo, bg="#0f172a")
             lbl.image = photo  
@@ -666,13 +713,13 @@ class FastSyncUI:
         pw.configure(bg="#0f172a")
         pw.resizable(False, False)
         tk.Label(pw, text=f"📤  {name}", fg="white", bg="#0f172a",
-                 font=("Segoe UI", 10, "bold")).pack(pady=(16, 4), padx=16, anchor="w")
+                 font=("Segoe UI Semibold", 11, "bold")).pack(pady=(18, 5), padx=18, anchor="w")
         prog_var = tk.DoubleVar(value=0)
         ttk.Progressbar(pw, variable=prog_var, maximum=100,
-                        length=380).pack(padx=20)
+                        length=380).pack(padx=22)
         prog_lbl = tk.Label(pw, text="Connecting…", fg="#94a3b8", bg="#0f172a",
-                            font=("Segoe UI", 9))
-        prog_lbl.pack(pady=6)
+                            font=("Segoe UI Semibold", 10))
+        prog_lbl.pack(pady=8)
         pw_alive = [True]
         def _safe_destroy():
             if pw_alive[0]:
@@ -736,12 +783,12 @@ class FastSyncUI:
         pw.configure(bg="#0f172a")
         pw.resizable(False, False)
         tk.Label(pw, text=f"📥  {filename}", fg="white", bg="#0f172a",
-                 font=("Segoe UI", 10, "bold")).pack(pady=(16, 4), padx=16, anchor="w")
+                 font=("Segoe UI Semibold", 11, "bold")).pack(pady=(18, 5), padx=18, anchor="w")
         pv = tk.DoubleVar(value=0)
-        ttk.Progressbar(pw, variable=pv, maximum=100, length=380).pack(padx=20)
+        ttk.Progressbar(pw, variable=pv, maximum=100, length=380).pack(padx=22)
         pl = tk.Label(pw, text="Receiving…", fg="#94a3b8", bg="#0f172a",
-                      font=("Segoe UI", 9))
-        pl.pack(pady=6)
+                      font=("Segoe UI Semibold", 10))
+        pl.pack(pady=8)
         total_mb = total / 1_048_576 if total else 0
 
         def _poll():

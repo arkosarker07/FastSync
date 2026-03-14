@@ -39,7 +39,7 @@
 
 **PC Application**
 
-<img src="screenshots/Screenshot_2026_03_14_205124.png" width="500"/>
+<img src="screenshots/Screenshot 2026-03-14 235650.png" width="500"/>
 
 ---
 

@@ -209,7 +209,10 @@ class FastSyncUI:
         self.current_path: str = ""
         self.path_stack: list = []
         self.phone_ip_var = tk.StringVar()
-        self.last_clipboard: str = pyperclip.paste()
+        try:
+            self.last_clipboard: str = pyperclip.paste()
+        except Exception:
+            self.last_clipboard = ""
 
         # declared for IDE
         self.status_var: tk.StringVar
